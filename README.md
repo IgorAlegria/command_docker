@@ -100,38 +100,38 @@ Para dockerizar a aplicação, foram criados três Dockerfile. Um para back-end,
   
   ## docker-compose
   ```js
-    version: '3'
-services:
-  todotests:
-    build: ./todo-app/tests
-    depends_on:
-     - todofront
-     - todoback
-    environment:
-      - FRONT_HOST=todofront
-    networks:
-      - trybe-network-docker
+  version: '3'
+  services:
+    todotests:
+      build: ./todo-app/tests
+      depends_on:
+       - todofront
+       - todoback
+      environment:
+        - FRONT_HOST=todofront
+      networks:
+        - trybe-network-docker
 
-  todofront:
-    build: ./todo-app/front-end
-    ports:
-      - 3000:3000
-    depends_on:
-      - todoback
-    environment:
-      - REACT_APP_API_HOST=todoback
-    networks:
-      - trybe-network-docker
+    todofront:
+      build: ./todo-app/front-end
+      ports:
+        - 3000:3000
+      depends_on:
+        - todoback
+      environment:
+        - REACT_APP_API_HOST=todoback
+      networks:
+        - trybe-network-docker
 
-  todoback: 
-    build: ./todo-app/back-end
-    ports:
-      - 3001:3001
-    networks:
-      - trybe-network-docker
+    todoback: 
+      build: ./todo-app/back-end
+      ports:
+        - 3001:3001
+      networks:
+        - trybe-network-docker
 
-networks:
-  trybe-network-docker:
+  networks:
+    trybe-network-docker:
   ```
   > O build utiliza as imagens criadas pelo Dockerfile, o service todotest depende do todoback, todofront e o sevice todofront depende do todoback para executar e estão conectados por um network trybe-network-docker.
   
